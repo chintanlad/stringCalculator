@@ -1,8 +1,13 @@
 package com.incubyte.stringcalculator;
 
 
+import java.util.regex.Pattern;
+
 /**
- * A simple calculator that adds numbers in the different formats
+ * A simple calculator that adds numbers in different formats.
+ * Supports:
+ * - Comma and newline as delimiters
+ * - Custom single-character delimiters with the format: "//[delimiter]\n[numbers]"
  */
 public class StringCalculator {
 
@@ -10,19 +15,22 @@ public class StringCalculator {
         // Return 0 if the input string is empty
         if (numbers.isEmpty()) return 0;
 
-        // Replace newline characters with commas to unify delimiters
-        String normalized = numbers.replace("\n", ",");
+        String delimiter = ",|\n"; // Default delimiters: comma or newline
+        String actualNumbers = numbers;
 
-        // Split the normalized string by commas
-        String[] nums = normalized.split(",");
+        // Check for custom delimiter syntax at the start of the string
+        if (numbers.startsWith("//")) {
+            int delimiterEndIndex = numbers.indexOf("\n");
+            delimiter = Pattern.quote(numbers.substring(2, delimiterEndIndex)); // escape special characters
+            actualNumbers = numbers.substring(delimiterEndIndex + 1);
+        }
 
+        // Splite the string by the delemiter and create the individuals numbers
+        String[] nums = actualNumbers.split(delimiter);
         int sum = 0;
-
-        // Convert each string to an integer and add to the total sum
         for (String num : nums) {
             sum += Integer.parseInt(num);
         }
-
         return sum;
     }
 }

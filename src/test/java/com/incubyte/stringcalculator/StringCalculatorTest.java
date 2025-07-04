@@ -13,13 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class StringCalculatorTest {
 
-//    private final StringCalculator calculator = new StringCalculator();
-//
-//    @Test
-//    void testEmptyStringReturnsZero() {
-//        assertEquals(0, calculator.add(""));
-//    }
-
 //    Instance of the StringCalculator for the testing...
     private StringCalculator calculator;
 
@@ -31,9 +24,6 @@ public class StringCalculatorTest {
         calculator = new StringCalculator();
     }
 
-    /**
-     * An empty string should return 0 as per the defined behavior.
-     */
     @Test
     void emptyStringshouldReturnZeroFor() {
         // Should return 0 for empty input
@@ -68,6 +58,18 @@ public class StringCalculatorTest {
     void newLineBetweenNumbersShouldBeHandledAsDelimiter() {
         // Input: "9\n5,2" -> Output: 16
         assertEquals(16, calculator.add("9\n5,2"));
+    }
+
+    @Test
+    void customDelimiterShouldBeHandledCorrectly() {
+        // Input: "//;\n1;2;3" -> Delimiter is ";", Sum is 6
+        assertEquals(6, calculator.add("//;\n1;2;3"));
+    }
+
+    @Test
+    void specialCharacterAsDelimiterShouldSum() {
+        // Input: "//$\n4$5$12" -> Delimiter is "$", Sum is 21
+        assertEquals(21, calculator.add("//$\n4$5$12"));
     }
 
 }
