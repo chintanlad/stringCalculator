@@ -129,15 +129,15 @@ public class StringCalculatorTest {
         assertEquals(34, calculator.add("//[$$$$]\n7$$$$8$$$$9$$$$10"));
     }
 
-//    @Test
-//    void shouldSupportMultipleSingleCharacterDelimiters() {
-//        // Input: "//[*][%]\n1*2%3*4" -> Output: 10
-//        assertEquals(10, calculator.add("//[*][%]\n1*2%3*4"));
-//
-//        // Input: "//[&][#]\n25#20#15&10" -> Output: 70
-//        assertEquals(70, calculator.add("//[&][#]\n25#20#15&10"));
-//    }
-//
+    @Test
+    void shouldSupportMultipleSingleCharacterDelimiters() {
+        // Input: "//[*][%]\n1*2%3*4" -> Output: 10
+        assertEquals(10, calculator.add("//[*][%]\n1*2%3*4"));
+
+        // Input: "//[&][#]\n25#20#15&10" -> Output: 70
+        assertEquals(70, calculator.add("//[&][#]\n25#20#15&10"));
+    }
+
 //    @Test
 //    void shouldSupportMultipleMultiCharacterDelimiters() {
 //        // Input: "//[**][%%]\n1**2%%3" -> Output: 6

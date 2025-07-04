@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  * - Count how many times the function is called
  * - Number greater than 1000 should be ignored
  * - Delimiters can be of any length
+ * - Allow multiple type of delimiters
  */
 public class StringCalculator {
 
