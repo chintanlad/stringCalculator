@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
  * Supports:
  * - Comma and newline as delimiters
  * - Custom single-character delimiters with the format: "//[delimiter]\n[numbers]"
+ * - Single Negative numbers show the exception message
+ * - Multiple negative numbers show the exception message
  */
 public class StringCalculator {
 

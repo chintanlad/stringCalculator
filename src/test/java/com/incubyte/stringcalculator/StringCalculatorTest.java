@@ -79,7 +79,19 @@ public class StringCalculatorTest {
                 () -> calculator.add("2,-5,3")
         );
 
+        // Input: "2,-5,3" -> Output: "Negative numbers not allowed: -5"
         assertEquals("Negative numbers not allowed: -5", exception.getMessage());
+    }
+
+    @Test
+    void multipleNegativeNumbersShouldBeListedInCustomException() {
+        NegativeNumberNotAllowedException exception = assertThrows(
+                NegativeNumberNotAllowedException.class,
+                () -> calculator.add("-1,4,-9,-100")
+        );
+
+        // Input: "-1,4,-9,-100" -> Output: "Negative numbers not allowed: -1,-9,-100"
+        assertEquals("Negative numbers not allowed: -1,-9,-100", exception.getMessage());
     }
 
 }
