@@ -7,12 +7,14 @@ package com.incubyte.stringcalculator;
 public class StringCalculator {
 
     public int add(String numbers) {
-
-        // Return 0 if the input string is null
+        // Return 0 if the input string is empty
         if (numbers.isEmpty()) return 0;
 
-        // Split the input string by commas to extract individual number strings
-        String[] nums = numbers.split(",");
+        // Replace newline characters with commas to unify delimiters
+        String normalized = numbers.replace("\n", ",");
+
+        // Split the normalized string by commas
+        String[] nums = normalized.split(",");
 
         int sum = 0;
 
@@ -20,6 +22,7 @@ public class StringCalculator {
         for (String num : nums) {
             sum += Integer.parseInt(num);
         }
+
         return sum;
     }
 }

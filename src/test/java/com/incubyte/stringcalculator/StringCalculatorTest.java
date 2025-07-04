@@ -49,7 +49,7 @@ public class StringCalculatorTest {
     @Test
     void twoNumberShouldReturnSumOfTwoNumbers() {
         // Input: "7,9" -> Output: 16
-        assertEquals(16, calculator.add("7,9 "));
+        assertEquals(16, calculator.add("7,9"));
     }
 
     @Test
@@ -62,6 +62,12 @@ public class StringCalculatorTest {
     void multipleNumberShouldReturnSumOfMultipleNumbers() {
         // Input: "5,15,78,98,69,98" -> Output: 363
         assertEquals(363, calculator.add("5,15,78,98,69,98"));
+    }
+
+    @Test
+    void newLineBetweenNumbersShouldBeHandledAsDelimiter() {
+        // Input: "9\n5,2" -> Output: 16
+        assertEquals(16, calculator.add("9\n5,2"));
     }
 
 }
