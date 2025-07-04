@@ -1,6 +1,8 @@
 package com.incubyte.stringcalculator;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -11,26 +13,43 @@ import java.util.regex.Pattern;
  */
 public class StringCalculator {
 
-    public int add(String numbers) {
-        // Return 0 if the input string is empty
-        if (numbers.isEmpty()) return 0;
+    public int add(String input) {
 
-        String delimiter = ",|\n"; // Default delimiters: comma or newline
-        String actualNumbers = numbers;
+        // Return 0 for empty input
+        if (input.isEmpty()) return 0;
 
-        // Check for custom delimiter syntax at the start of the string
-        if (numbers.startsWith("//")) {
-            int delimiterEndIndex = numbers.indexOf("\n");
-            delimiter = Pattern.quote(numbers.substring(2, delimiterEndIndex)); // escape special characters
-            actualNumbers = numbers.substring(delimiterEndIndex + 1);
+        // Set default delimiters (comma or newline)
+        String delimiterPattern = ",|\n";
+        String numbersOnly = input;
+
+        // Check if the input defines a custom delimiter (e.g., "//;\n1;2")
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            String customDelimiter = input.substring(2, delimiterEndIndex);
+            delimiterPattern = Pattern.quote(customDelimiter);
+            numbersOnly = input.substring(delimiterEndIndex + 1);
         }
 
-        // Splite the string by the delemiter and create the individuals numbers
-        String[] nums = actualNumbers.split(delimiter);
-        int sum = 0;
-        for (String num : nums) {
-            sum += Integer.parseInt(num);
+        // Split numbers using the detected delimiter
+        String[] tokens = numbersOnly.split(delimiterPattern);
+        List<Integer> negativeNumbers = new ArrayList<>();
+        int total = 0;
+
+        for (String token : tokens) {
+            int number = Integer.parseInt(token.trim());
+
+            if (number < 0) {
+                negativeNumbers.add(number);
+            }
+
+            total += number;
         }
-        return sum;
+
+        // Throw an exception if any negative numbers are found
+        if (!negativeNumbers.isEmpty()) {
+            throw new NegativeNumberNotAllowedException(negativeNumbers);
+        }
+
+        return total;
     }
 }

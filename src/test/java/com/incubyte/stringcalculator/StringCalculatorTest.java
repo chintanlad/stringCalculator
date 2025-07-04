@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -70,6 +70,16 @@ public class StringCalculatorTest {
     void specialCharacterAsDelimiterShouldSum() {
         // Input: "//$\n4$5$12" -> Delimiter is "$", Sum is 21
         assertEquals(21, calculator.add("//$\n4$5$12"));
+    }
+
+    @Test
+    void singleNegativeNumberShouldThrowCustomException() {
+        NegativeNumberNotAllowedException exception = assertThrows(
+                NegativeNumberNotAllowedException.class,
+                () -> calculator.add("2,-5,3")
+        );
+
+        assertEquals("Negative numbers not allowed: -5", exception.getMessage());
     }
 
 }
