@@ -94,4 +94,15 @@ public class StringCalculatorTest {
         assertEquals("Negative numbers not allowed: -1,-9,-100", exception.getMessage());
     }
 
+    @Test
+    void addMethodShouldTrackCallCount() {
+        // Calling add multiple times
+        calculator.add("1,2");
+        calculator.add("3,4");
+        calculator.add("5");
+
+        // Total number of calls should be 3
+        assertEquals(3, calculator.getCalledCount());
+    }
+
 }

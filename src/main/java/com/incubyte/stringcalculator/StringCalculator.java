@@ -12,10 +12,16 @@ import java.util.regex.Pattern;
  * - Custom single-character delimiters with the format: "//[delimiter]\n[numbers]"
  * - Single Negative numbers show the exception message
  * - Multiple negative numbers show the exception message
+ * - Count how many times the function is called
  */
 public class StringCalculator {
 
+    // Counter to track how many times the 'add' method has been called
+    private int callCount = 0;
+
     public int add(String input) {
+
+        callCount++; // Track method calls
 
         // Return 0 for empty input
         if (input.isEmpty()) return 0;
@@ -53,5 +59,13 @@ public class StringCalculator {
         }
 
         return total;
+    }
+
+
+    /**
+     * Returns how many times the add method was invoked.
+     */
+    public int getCalledCount() {
+        return callCount;
     }
 }
