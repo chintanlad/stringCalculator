@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  * - Single Negative numbers show the exception message
  * - Multiple negative numbers show the exception message
  * - Count how many times the function is called
+ * - Number grater than 1000 should be ignored
  */
 public class StringCalculator {
 
@@ -49,8 +50,9 @@ public class StringCalculator {
             if (number < 0) {
                 negativeNumbers.add(number);
             }
-
-            total += number;
+            else if (number <= 1000) {
+                total += number;
+            }
         }
 
         // Throw an exception if any negative numbers are found

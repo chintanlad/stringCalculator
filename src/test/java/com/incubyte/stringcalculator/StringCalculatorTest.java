@@ -105,4 +105,19 @@ public class StringCalculatorTest {
         assertEquals(3, calculator.getCalledCount());
     }
 
+    @Test
+    void numbersGreaterThan1000ShouldBeIgnored() {
+        // 1001 is ignored, only 2 is added
+        // Input: "2,1001" -> Output: 2
+        assertEquals(2, calculator.add("2,1001"));
+
+        // 1000 is included, 1001 is ignored
+        // Input: "2,1000,1001" -> Output: 1002
+        assertEquals(1002, calculator.add("2,1000,1001"));
+
+        // No numbers below 1000 → returns 0
+        // Input: "1001,2000,5000" -> Output: 0
+        assertEquals(0, calculator.add("1001,2000,5000"));
+    }
+
 }
