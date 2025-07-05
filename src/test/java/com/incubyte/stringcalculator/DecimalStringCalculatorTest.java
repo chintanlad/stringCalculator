@@ -47,4 +47,28 @@ public class DecimalStringCalculatorTest {
         // Input: "1.5,2.7" -> Output: 4.0
         assertEquals(4.2, calculator.add("1.5,2.7"));
     }
+
+    @Test
+    void decimalsSeparatedByNewlineShouldBeSummed() {
+        // Supports newline as a valid delimiter between decimals
+
+        // Input: "3.2\n1.8" -> Output: 5.0
+        assertEquals(5.0, calculator.add("3.2\n1.8"));
+    }
+
+    @Test
+    void customDelimiterShouldBeHandledForDecimalInput() {
+        // Handles custom single-character delimiter (e.g., ";")
+
+        // Input: "//;\n1.5;2.5" -> Output: 4.0
+        assertEquals(4.0, calculator.add("//;\n1.5;2.5"));
+    }
+
+    @Test
+    void specialCharacterDelimiterWithDecimalNumbers() {
+        // Supports special characters as custom delimiters (like "$")
+
+        // Input: "//$\n4.25$5.75$10" -> Output: 20.0
+        assertEquals(20.0, calculator.add("//$\n4.25$5.75#10"));
+    }
 }
