@@ -33,7 +33,7 @@ public class DecimalStringCalculator {
         callCount++; // Track number of calls to add()
 
         // Return 0.0 if the input is null or empty
-        if (input == null || input.isEmpty()) return -1;
+        if (input == null || input.isEmpty()) return 0.0;
 
         // Default delimiters are comma and newline
         String delimiterPattern = ",|\n";
