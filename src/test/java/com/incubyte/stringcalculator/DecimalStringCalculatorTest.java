@@ -69,6 +69,60 @@ public class DecimalStringCalculatorTest {
         // Supports special characters as custom delimiters (like "$")
 
         // Input: "//$\n4.25$5.75$10" -> Output: 20.0
-        assertEquals(20.0, calculator.add("//$\n4.25$5.75#10"));
+        assertEquals(20.0, calculator.add("//$\n4.25$5.75$10"));
+    }
+
+    @Test
+    void negativeDecimalShouldThrowException() {
+        // A single negative number should trigger an exception with the number in the message
+
+        // Input: "-2.5,3.5" should throw exception with message
+        DoubleNegativeNumberException exception = assertThrows(
+                DoubleNegativeNumberException.class,
+                () -> calculator.add("-2.5,3.5")
+        );
+
+        assertEquals("Negative numbers not allowed: -2.5", exception.getMessage());
+    }
+
+    @Test
+    void multipleNegativeDecimalsShouldBeListedInException() {
+        // All negative decimals should be listed in the exception message
+
+        // Input: "-1.1,-2.2,3.3" -> Exception lists all negatives
+        DoubleNegativeNumberException exception = assertThrows(
+                DoubleNegativeNumberException.class,
+                () -> calculator.add("-1.1,-2.2,3.3")
+        );
+
+        assertEquals("Negative numbers not allowed: -1.1,-2.2", exception.getMessage());
+    }
+
+    @Test
+    void decimalNumbersAbove1000ShouldBeIgnored() {
+        // Values greater than 1000 should be skipped during summation
+
+        // Input: "2.2,1000.5" -> Output: 2.2
+        assertEquals(2.2, calculator.add("2.2,1000.5"));
+    }
+
+    @Test
+    void shouldSupportMultipleMultiCharDelimitersWithDecimals() {
+        // Handles multiple custom delimiters with more than one character
+
+        // Input: "//[**][%%]\n1.1**2.2%%3.3" -> Output: 6.6
+        assertEquals(6.6, calculator.add("//[**][%%]\n1.1**2.2%%3.3"));
+    }
+
+    @Test
+    void shouldSupportMultipleCallsTracking() {
+        // Tracks how many times the add method has been called
+
+        calculator.add("1.1,2.2");
+        calculator.add("3.3");
+        calculator.add("4.4,5.5");
+
+        // Total calls = 3
+        assertEquals(3, calculator.getCalledCount());
     }
 }
