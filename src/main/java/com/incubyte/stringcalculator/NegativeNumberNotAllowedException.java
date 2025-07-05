@@ -12,6 +12,12 @@ public class NegativeNumberNotAllowedException extends RuntimeException {
         super(buildMessage(negativeNumbers));
     }
 
+    /**
+     * Builds the error message by converting the list of negative numbers into a comma-separated string.
+     *
+     * @param negatives list of negative integers
+     * @return formatted exception message including the invalid numbers
+     */
     private static String buildMessage(List<Integer> negatives) {
         String negativeList = negatives.stream()
                 .map(String::valueOf)

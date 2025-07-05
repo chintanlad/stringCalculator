@@ -23,6 +23,13 @@ public class StringCalculator {
     // Counter to track how many times the 'add' method has been called
     private int callCount = 0;
 
+    /**
+     * Parses the input string, extracts numbers based on defined or default delimiters,
+     * and returns their sum. Throws an exception if negative numbers are present.
+     *
+     * @param input the input string containing numbers
+     * @return sum of the numbers
+     */
     public int add(String input) {
 
         callCount++; // Increment the count each time the method is called
@@ -90,6 +97,8 @@ public class StringCalculator {
 
     /**
      * Returns how many times the add method was invoked.
+     *
+     * @return call count
      */
     public int getCalledCount() {
         return callCount;
